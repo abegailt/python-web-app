@@ -29,7 +29,7 @@ db.create_all()
 @app.route('/')
 def tasks_list():
     tasks = Task.query.all()
-    return render_template('testing5.html', tasks=tasks)
+    return render_template('index.html', tasks=tasks)
 
 
 #storing jsonjquery
@@ -65,7 +65,7 @@ def background_process2():
     details.content = content
     db.session.add(details)
     db.session.commit()
-    return render_template('testing5.html',tasks=tasks)
+    return render_template('index.html',tasks=tasks)
 
 
 if __name__ == '__main__':
