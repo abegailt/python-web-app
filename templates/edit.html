@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+ <html> 
+ <head> <title>WanderList: To-do List</title>
+ <link rel="stylesheet" type="text/css" href="../static/style.css"></link>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body action="/task" method=post>
+<nav class="fixed-nav-bar">
+<h1>WanderList: A todo list</h1>
+</nav>
+<div class="center">
+<div class="content">
+  <div class="container">
+  <h2 class="section-title">To-Do</h1>
+    <h5><i>Edit your todo and click the 'Save' button</i></h5>
+<table id="input">
+<tr>
+  <td>
+  <input id="todo" name=progress  value="{{ details.content }}"></td>
+  <td id="add-btn">
+<input  name="progress1" value="{{ details.id }}" type="hidden">
+<button id = "edit" >Save</button></td>
+</tr>
+</table>
+
+<hr>
+
+<script src="https://ajax
+.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+     
+
+$(function () {
+      $("#edit").click(function() {
+            $.getJSON('/json2',{
+                tasK: $('input[name="progress"]').val(),
+                id: $('input[name="progress1"]').val(),          
+            });   
+      }); 
+      $("#edit").click(function() {
+      window.location.href = "http://localhost:5000";
+      });  
+});
+
+
+</script>
+
+<table id="output">
+<ul id="demo"></ul>
+
+<ul>
+{% for task in tasks %}
+    <tr>
+    <td id="task-in-tbl">
+    <ul>
+      <li>
+        {% if task.done %} <strike> {% endif %}{{ task.content }} {% if task.done %} </strike>{% endif %}
+        </td>
+        <td id="btn-in-tbl">
+        <a class="button-link" href="/edit/{{ task.id }}">Edit</a>
+      </td>
+      <td id="btn-in-tbl">
+        <a class="button-link" href="/delete/{{ task.id }}">Delete</a>
+      </td>
+    </ul>
+  </tr>
+{% endfor %}
+</table>
+</div>
+</div>
+<div id="footer">
+</div>
+</center>
+</body>
+</html>
