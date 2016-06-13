@@ -32,7 +32,7 @@ def tasks_list():
     return render_template('index.html', tasks=tasks)
 
 
-#storing jsonjquery
+#after click add button and storing data to sqlserver
 @app.route('/json')
 def background_process():
     task2 = request.args.get('tasK')
@@ -41,6 +41,7 @@ def background_process():
     db.session.commit()
     return redirect('/')
 
+#after clicking delete button
 @app.route('/delete/<task_id>')
 def delete_task(task_id):
     task = Task.query.get(task_id)
@@ -51,12 +52,14 @@ def delete_task(task_id):
     db.session.commit()
     return redirect('/')
 
+#after clicking edit button
 @app.route('/edit/<int:task_id>')
 def edit_task_id(task_id):
     details = Task.query.get(task_id)
     tasks   = Task.query.all()
     return render_template('edit.html',details=details ,tasks=tasks)
 
+#for updating data after editing
 @app.route('/json2')
 def background_process2():
     id              = request.args.get('id')
