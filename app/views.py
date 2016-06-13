@@ -42,11 +42,11 @@ def edit_task_id(task_id):
 #for updating data after editing
 @app.route('/json2')
 def background_process2():
-    id              = request.args.get('id')
-    content         = request.args.get('tasK')
+    content         = request.args.get('data')
+    id              = request.args.get('data2')
     details         = Task.query.get(id)
     details.content = content
     db.session.add(details)
     db.session.commit()
-    return render_template('index.html',tasks=tasks)
+    return "Success"
 
