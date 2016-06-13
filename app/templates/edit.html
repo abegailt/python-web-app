@@ -24,18 +24,25 @@
  <hr>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
  <script>
- $(function () {
+ 
    $("#edit").click(function() {
-    $.getJSON('/json2',{
-     tasK: $('input[name="progress"]').val(),
-     id: $('input[name="progress1"]').val(),          
-    });   
-   }); 
-   $("#edit").click(function() {
-    window.location.href = "http://localhost:5000";
-   });  
-});
-
+    var task = $('input[name="progress"]').val();
+    var id = $('input[name="progress1"]').val() ;
+    $.ajax({
+      type: 'GET',
+      url : '/json2',
+      data : 'data=' + task + '&data2='+ id,
+      contentType: "application/json; charset=utf-8",
+      success : function (data){
+          window.location.href = "http://127.0.0.1:5000/"
+      },
+      timeout : 10000,
+      error : function () {
+        alert ("Error");
+      }
+    });
+  });
+  
 </script>
  <table id="output">
  <ul id="demo"></ul>
